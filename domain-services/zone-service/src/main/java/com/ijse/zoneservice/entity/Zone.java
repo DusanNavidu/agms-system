@@ -1,6 +1,9 @@
 package com.ijse.zoneservice.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author Dusan
@@ -9,6 +12,9 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "zones")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Zone {
 
     @Id
