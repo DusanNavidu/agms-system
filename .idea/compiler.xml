@@ -2,11 +2,13 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="api-gateway" />
+        <module name="sensor-telemetry-service" />
         <module name="config-server" />
         <module name="zone-service" />
         <module name="service-registry" />
@@ -17,6 +19,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="api-gateway" options="-parameters" />
       <module name="config-server" options="-parameters" />
+      <module name="sensor-telemetry-service" options="-parameters" />
       <module name="service-registry" options="-parameters" />
       <module name="zone-service" options="-parameters" />
     </option>
