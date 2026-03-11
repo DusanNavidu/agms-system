@@ -45,6 +45,24 @@ The system demonstrates complex inter-service orchestration through the followin
 
 ---
 
+## 📊 System Monitoring & Validation
+
+To validate the deployment and ensure the marking criteria are met, the following system validations have been performed:
+
+### 1. Service Discovery Registration (Eureka)
+All microservices successfully registered and communicating via the Eureka server.
+![Eureka Service Registry](docs/eureka-dashboard.png)
+
+### 2. Infrastructure Orchestration (Docker)
+Complete containerized ecosystem running flawlessly via Docker Compose.
+![Docker Containers](docs/docker-containers.png)
+
+### 3. API & End-to-End Flow Validation (Postman)
+Seamless testing of centralized gateway routing and JWT authentication.
+![Postman API Test](docs/postman-test-success.png)
+
+---
+
 ## 🛠️ Deployment & Infrastructure Setup
 
 ### 🚦 Recommended Startup Sequence:
