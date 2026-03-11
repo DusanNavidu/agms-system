@@ -20,7 +20,6 @@ public class SensorController {
     @Autowired
     private SensorService sensorService;
 
-    // අන්තිමට ආපු දත්ත පෙන්නන endpoint එක
     @GetMapping("/latest")
     public ResponseEntity<TelemetryResponseDTO> getLatestReading() {
         TelemetryResponseDTO latest = sensorService.getLatestReading();

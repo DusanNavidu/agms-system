@@ -1,0 +1,84 @@
+version: '3.8'
+
+services:
+  # 1. MySQL Database Container එක
+  mysql-db:
+    image: mysql:8.0
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: Ijse@1234
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  # 2. Service Registry (Eureka Server)
+  service-registry:
+    build: ./infrastructure/service-registry
+    container_name: service-registry
+    ports:
+      - "8761:8761"
+
+  # 3. API Gateway
+  api-gateway:
+    build: ./infrastructure/api-gateway
+    container_name: api-gateway
+    ports:
+      - "8080:8080"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-registry:8761/eureka/
+    depends_on:
+      - service-registry
+
+  # 4. Zone Service
+  zone-service:
+    build: ./domain-services/zone-service
+    container_name: zone-service
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/agms_zone_db?createDatabaseIfNotExist=true
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-registry:8761/eureka/
+    depends_on:
+      - mysql-db
+      - service-registry
+
+  # 5. Sensor Telemetry Service
+  sensor-telemetry-service:
+    build: ./domain-services/sensor-telemetry-service
+    container_name: sensor-telemetry-service
+    ports:
+      - "8082:8082"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-registry:8761/eureka/
+    depends_on:
+      - service-registry
+
+  # 6. Automation Service
+  automation-service:
+    build: ./domain-services/automation-service
+    container_name: automation-service
+    ports:
+      - "8083:8083"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/agms_automation_db?createDatabaseIfNotExist=true
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-registry:8761/eureka/
+    depends_on:
+      - mysql-db
+      - service-registry
+
+  # 7. Crop Inventory Service
+  crop-inventory-service:
+    build: ./domain-services/crop-inventory-service
+    container_name: crop-inventory-service
+    ports:
+      - "8084:8084"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/agms_crop_db?createDatabaseIfNotExist=true
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-registry:8761/eureka/
+    depends_on:
+      - mysql-db
+      - service-registry
+
+volumes:
+  db_data: # Database එකේ දත්ත මැකෙන්නේ නැති වෙන්න Volume එකක් හදනවා

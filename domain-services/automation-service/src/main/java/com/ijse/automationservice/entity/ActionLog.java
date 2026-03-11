@@ -14,9 +14,6 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "action_logs")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class ActionLog {
 
     @Id
@@ -25,6 +22,51 @@ public class ActionLog {
 
     private String zoneId;
     private Double recordedTemperature;
-    private String actionTaken; // "TURN_FAN_ON" or "TURN_HEATER_ON"
+    private String actionTaken;
     private LocalDateTime timestamp;
+
+    // --- Constructors ---
+    public ActionLog() {
+    }
+
+    // --- Getters and Setters ---
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getZoneId() {
+        return zoneId;
+    }
+
+    public void setZoneId(String zoneId) {
+        this.zoneId = zoneId;
+    }
+
+    public Double getRecordedTemperature() {
+        return recordedTemperature;
+    }
+
+    public void setRecordedTemperature(Double recordedTemperature) {
+        this.recordedTemperature = recordedTemperature;
+    }
+
+    public String getActionTaken() {
+        return actionTaken;
+    }
+
+    public void setActionTaken(String actionTaken) {
+        this.actionTaken = actionTaken;
+    }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
+    }
 }

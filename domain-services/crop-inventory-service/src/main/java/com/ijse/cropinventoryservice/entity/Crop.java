@@ -14,9 +14,6 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "crops")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Crop {
 
     @Id
@@ -30,4 +27,57 @@ public class Crop {
 
     @Enumerated(EnumType.STRING)
     private CropState state;
+
+    // --- Constructors ---
+    public Crop() {
+    }
+
+    // --- Getters and Setters ---
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCropType() {
+        return cropType;
+    }
+
+    public void setCropType(String cropType) {
+        this.cropType = cropType;
+    }
+
+    public String getZoneId() {
+        return zoneId;
+    }
+
+    public void setZoneId(String zoneId) {
+        this.zoneId = zoneId;
+    }
+
+    public LocalDate getPlantDate() {
+        return plantDate;
+    }
+
+    public void setPlantDate(LocalDate plantDate) {
+        this.plantDate = plantDate;
+    }
+
+    public CropState getState() {
+        return state;
+    }
+
+    public void setState(CropState state) {
+        this.state = state;
+    }
 }

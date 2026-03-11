@@ -9,8 +9,26 @@ spring:
       discovery:
         locator:
           enabled: true
+      routes:
+        # 1. Login/Auth Service (No Security Filter Needed)
+        - id: auth-service
+          uri: lb://AUTH-SERVICE
+          predicates:
+            - Path=/auth/**
+
+        # 2. Zone Service (Security Filter Added)
+        - id: zone-service
+          uri: lb://ZONE-SERVICE
+          predicates:
+            - Path=/api/zones/**
+          filters:
+            - name: AuthenticationFilter # මෙතන තමයි අර Gatekeeper ඉන්නේ
 
 eureka:
   client:
+    fetch-registry: true
+    register-with-eureka: true
     service-url:
       defaultZone: http://localhost:8761/eureka/
+  instance:
+    initial-status: up
